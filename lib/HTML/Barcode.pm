@@ -40,8 +40,8 @@ has 'css_class' => (
     trigger => \&_css_class_set,
 );
 
-has 'td_on_class' => (is => 'rw', 'isa' => 'Str', lazy => 1, builder => \&_build_td_on_class);
-has 'td_off_class' => (is => 'rw', 'isa' => 'Str', lazy => 1, builder => \&_build_td_off_class);
+has 'td_on_class' => (is => 'rw', 'isa' => 'Str', lazy => 1, builder => '_build_td_on_class');
+has 'td_off_class' => (is => 'rw', 'isa' => 'Str', lazy => 1, builder => '_build_td_off_class');
 sub _css_class_set {
     my ($self) = @_;
     $self->td_on_class($self->_build_td_on_class);
@@ -135,7 +135,7 @@ sub _generate_td {
 
 =head1 NAME
 
-HTML::Barcode - A base class for HTML representations of barcodes
+HTML::Barcode - Render HTML representations of barcodes
 
 =head1 DESCRIPTION
 

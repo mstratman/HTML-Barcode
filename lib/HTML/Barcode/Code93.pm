@@ -13,58 +13,59 @@ HTML::Barcode::Code93 - Generate HTML representations of Code 93 barcodes
 
 =head1 SYNOPSIS
 
-  # TODO...
+  my $code = HTML::Barcode::Code93->new(text => 'MONKEY');
+  print $code->render;
 
 =head1 DESCRIPTION
 
-TODO...
+This class allows you easily create HTML representations of Code 93 barcodes.
 
-=head2 Known Types
+=begin html
 
-Here are some of the types of barcodes you can scan with the modules in 
-this distribution.  Others may exist, so try searching CPAN.
+<p>Here is an example of a Code 93 barcode rendered with this module:</p>
+<style type="text/css">table.hbc{border-width:0;border-spacing:0;}table.hbc{border-width:0;border-spacing:0;}table.hbc tr, table.hbc td{border:0;margin:0;padding:0;}table.hbc td{text-align:center;}table.hbc td.hbc_on,table.hbc td.hbc_off{width:2px;height:100px;}table.hbc td.hbc_on{background-color:#000;color:inherit;}table.hbc td.hbc_off{background-color:#fff;color:inherit;}</style><table class="hbc"><tr><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_on"></td><td class="hbc_off"></td><td class="hbc_on"></td></tr><tr><td colspan="91">MONKEY</td></tr></table>
 
-=over 4
+=end html
 
-=item L<HTML::Barcode::QRCode> - Two dimensional QR codes.
-
-=item L<HTML::Barcode::Code93> - Code 93 barcodes.
-
-=item L<HTML::Barcode::Code128> - Code 128 barcodes.
-
-=back
-
-=head2 Subclassing
-
-To add a new type of barcode, create a subclass of either L<HTML::Barcode::1D|HTML::Barcode::1D/Subclassing>
-for traditional barcodes, L<HTML::Barcode::2D|HTML::Barcode::2D/Subclassing> for 2-dimensional bar codes,
-or L<HTML::Barcode> if neither of those suit your needs.
-
-Use one of the L<existing modules|/"Known Types"> as a starting point.
-
-In order for custom stylesheets to be as reusable as possible, please
-try to use the same generated HTML as the existing modules. Specifically:
-
-  <table class="table_class">
-    <tr>
-      <td class="table_class_on"></td>
-      <td class="table_class_off"></td>
-    </tr>
-  </table>
-
-where "table_class" is the value of C<< $self->table_class >>.
+You can read more about Code 93 online (e.g. L<http://en.wikipedia.org/wiki/Code_93>).
 
 =head1 METHODS
 
 =head2 new (%attributes)
 
-Default constructor provided by L<Mouse>, which can take values for
-any of the L<attributes|/ATTRIBUTES>.
+Instantiate a new HTML::Barcode::Code93 object. The C<%attributes> hash
+requires the L</text> attribute, and can take any of the other
+L<attributes|/ATTRIBUTES> listed below.
+
+=head2 render
+
+This is a convenience routine which returns C<< <style>...</style> >> tags
+and the rendered barcode.
+
+If you are printing multiple barcodes or want to ensure your C<style> tags
+are in your HTML headers, then you probably want to output the barcode
+and style separately with L</render_barcode> and
+L</css>.
+
+=head2 render_barcode
+
+Returns only the rendered barcode.  You will need to provide stylesheets
+separately, either writing them yourself or using the output of L</css>.
+
+=head2 css
+
+Returns CSS needed to properly display your rendered barcode.  This is
+only necessary if you are using L</render_barcode> instead of the
+easier L</render> method.
 
 =head1 ATTRIBUTES
 
 These attributes can be passed to L<new|/"new (%attributes)">, or used
 as accessors.
+
+=head2 text
+
+B<Required> - The information to put into the barcode.
 
 =head2 foreground_color
 
@@ -82,13 +83,19 @@ A CSS value for the width of an individual bar. Default is '2px'.
 
 A CSS value for the height of an individual bar. Default is '100px'.
 
-=head2 table_class
+=head2 show_text
 
-The value for the C<class> attribute applied to the C<table> tag.
-C<td> tags within the table will have either table_class_on or table_class_off
+Boolean, default true. Indicates whether or not to render the text
+below the barcode.
+
+=head2 css_class
+
+The value for the C<class> attribute applied to any container tags
+in the HTML (e.g. C<table> or C<div>).
+C<td> tags within the table will have either css_class_on or css_class_off
 classes applied to them.
 
-For example, if table_class is "barcode", you will get C<< <table class="barcode"> >> and its cells will be either C<< <td class="barcode_on"> >> or
+For example, if css_class is "barcode", you will get C<< <table class="barcode"> >> and its cells will be either C<< <td class="barcode_on"> >> or
 C<< <td class="barcode_off"> >>.
 
 =head1 AUTHOR

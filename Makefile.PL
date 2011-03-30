@@ -7,9 +7,9 @@ all_from 'lib/HTML/Barcode.pm';
 author   q{Mark A. Stratman <stratman@gmail.com>};
 license  'perl';
 
-requires 'Class::Accessor'  => '0.34';
+requires 'Mouse' => '0.91';
 
-recommends 'Barcode::Code128';
+recommends 'Barcode::Code128' => '2.02';
 
 build_requires 'Test::More';
 

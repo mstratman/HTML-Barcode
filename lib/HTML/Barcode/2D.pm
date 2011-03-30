@@ -4,6 +4,8 @@ extends 'HTML::Barcode';
 
 has '+show_text' => (default => 0);
 
+has '+bar_width' => (default => '3px');
+has '+bar_height' => (default => '3px');
 has module_size => (
     is      => 'rw',
     default => '3px',
@@ -11,8 +13,8 @@ has module_size => (
 );
 sub _module_size_set {
     my ($self, $size) = @_;
-    $self->bar_height($size);
     $self->bar_width($size);
+    $self->bar_height($size);
 }
 
 
