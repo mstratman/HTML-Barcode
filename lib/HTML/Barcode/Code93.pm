@@ -1,5 +1,5 @@
 package HTML::Barcode::Code93;
-use Mouse;
+use Any::Moose;
 extends 'HTML::Barcode::1D';
 
 sub barcode_data {
@@ -269,4 +269,5 @@ sub _calculateSums {
     return reverse @array;
 }
 
+no Any::Moose;
 1; # End of HTML::Barcode

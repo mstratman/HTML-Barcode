@@ -1,5 +1,5 @@
 package HTML::Barcode::Code128;
-use Mouse;
+use Any::Moose;
 extends 'HTML::Barcode::1D';
 use Barcode::Code128;
 
@@ -145,5 +145,5 @@ See http://dev.perl.org/licenses/ for more information.
 =cut
 
 
-
+no Any::Moose;
 1;

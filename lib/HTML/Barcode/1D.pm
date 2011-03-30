@@ -1,5 +1,5 @@
 package HTML::Barcode::1D;
-use Mouse;
+use Any::Moose;
 extends 'HTML::Barcode';
 
 =head1 NAME
@@ -64,4 +64,5 @@ See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
+no Any::Moose;
 1; # End of HTML::Barcode

@@ -1,5 +1,8 @@
 Revision history for HTML-Barcode
 
+0.04    Wed Mar 30 13:27:24 CDT 2011
+        - use Any::Mouse
+
 0.03    Tue Mar 29 19:18:38 CDT 2011
         - Initial release
 

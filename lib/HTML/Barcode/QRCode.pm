@@ -1,5 +1,5 @@
 package HTML::Barcode::QRCode;
-use Mouse;
+use Any::Moose;
 extends 'HTML::Barcode::2D';
 use Text::QRCode;
 
@@ -127,4 +127,5 @@ See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
+no Any::Moose;
 1;
