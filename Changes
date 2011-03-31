@@ -1,5 +1,9 @@
 Revision history for HTML-Barcode
 
+0.05    Thu Mar 31 18:46:41 CDT 2011
+        - Add synopsis to HTML::Barcode (it wasn't immediately 
+          clear how to use this module)
+
 0.04    Wed Mar 30 13:27:24 CDT 2011
         - use Any::Mouse
 

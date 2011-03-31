@@ -1,7 +1,7 @@
 package HTML::Barcode;
 use Any::Moose;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 has 'text' => (
     is  => 'rw',
@@ -137,18 +137,24 @@ sub _generate_td {
 
 HTML::Barcode - Render HTML representations of barcodes
 
+=head1 SYNOPSIS
+
+  # HTML::Barcode::Code93 is just one example, there are others.
+  my $code = HTML::Barcode::Code93->new(text => 'MONKEY');
+  print $code->render;
+
+See the documentation for the specific L<types of barcodes|/"Known Types"> 
+for detailed instructions.
+
 =head1 DESCRIPTION
 
 This is a base class for creating HTML representations of barcodes.
-Do not use it directly.
-
-If you are looking to generate a barcode, please see one of the following
-modules instead:
+Do not use it directly.  If you are looking to generate a barcode, please see one of the following modules instead:
 
 =head2 Known Types
 
-Here are some of the types of barcodes you can generate with 
-this distribution.  Others may exist, so try searching CPAN.
+Here are the types of barcodes you can generate with this distribution.
+Others may exist, so try searching CPAN.
 
 =over 4
 
@@ -168,7 +174,11 @@ or L<HTML::Barcode> if neither of those suit your needs.
 
 Use one of the L<existing modules|/"Known Types"> as a starting point.
 
-=head3 barcode_data
+=head3 Required methods for your subclass
+
+=over 4
+
+=item barcode_data
 
 You need to either override this, or override the C<render_barcode> method
 so it does not use this.
@@ -178,10 +188,12 @@ or an arrayref of arrayrefs (for 2D).
 
 It is not recommended to publish this method in your API.
 
-=head3 Other methods
+=item Other methods
 
 Feel free to override any other methods, or use method modifiers
 (C<around>, C<before>, C<after>) as you see fit.
+
+=back
 
 =head1 METHODS
 
