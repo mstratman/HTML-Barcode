@@ -1,7 +1,7 @@
 package HTML::Barcode;
 use Any::Moose;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 has 'text' => (
     is  => 'rw',
@@ -102,13 +102,13 @@ sub css {
     my $on = $self->td_on_class;
     my $off = $self->td_off_class;
     return
-           "table.${class}{border-width:0;border-spacing:0;}"
-         . "table.${class}{border-width:0;border-spacing:0;}"
+           "table.${class} {border-width:0;border-spacing:0;}"
+         . "table.${class} {border-width:0;border-spacing:0;}"
          . "table.${class} tr, table.${class} td{border:0;margin:0;padding:0;}"
          . "table.${class} td{text-align:center;}"
-         . "table.${class} td.${on},table.${class} td.${off}{width:" . $self->bar_width . ";height:" . $self->bar_height . ";}"
-         . "table.${class} td.${on}{background-color:" . $self->foreground_color . ";color:inherit;}"
-         . "table.${class} td.${off}{background-color:" . $self->background_color . ";color:inherit;}"
+         . "table.${class} td.${on},table.${class} td.${off} {width:" . $self->bar_width . ";height:" . $self->bar_height . ";}"
+         . "table.${class} td.${on} {background-color:" . $self->foreground_color . ";color:inherit;}"
+         . "table.${class} td.${off} {background-color:" . $self->background_color . ";color:inherit;}"
          ;
 }
 
