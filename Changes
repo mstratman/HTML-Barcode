@@ -1,5 +1,8 @@
 Revision history for HTML-Barcode
 
+0.07    ...TODO
+        - Moved code93 logic into Barcode::Code93
+
 0.06    Thu Mar 31 20:18:56 CDT 2011
         - Fixed string interpolation issues for perl 5.6(?)
 

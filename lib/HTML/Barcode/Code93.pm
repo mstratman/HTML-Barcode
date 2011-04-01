@@ -1,10 +1,16 @@
 package HTML::Barcode::Code93;
 use Any::Moose;
 extends 'HTML::Barcode::1D';
+use Barcode::Code93;
+
+has '_code93' => (
+    is      => 'ro',
+    default => sub { Barcode::Code93->new },
+);
 
 sub barcode_data {
     my ($self) = @_;
-    return $self->_barcode(uc $self->text);
+    return $self->_code93->barcode(uc $self->text);
 }
 
 =head1 NAME
@@ -106,9 +112,9 @@ Mark A. Stratman, C<< <stratman@gmail.com> >>
 
 L<http://github.com/mstratman/HTML-Barcode>
 
-=head1 ACKNOWLEDGEMENTS
+=head1 SEE ALSO
 
-The calculation code is from L<GD::Barcode::Code93> by Chris DiMartino.
+L<Barcode::Code93>
 
 =head1 LICENSE AND COPYRIGHT
 
@@ -122,152 +128,6 @@ See http://dev.perl.org/licenses/ for more information.
 
 
 =cut
-
-
-
-#------------------------------------------------------------------------------
-# barcode (for GD::Barcode::Code93)
-#------------------------------------------------------------------------------
-sub _barcode {
-    my $self = shift;
-    my $text = shift;
-
-    my $code93bar = {
-        0   =>'100010100',
-        1   =>'101001000',
-        2   =>'101000100',
-        3   =>'101000010',
-        4   =>'100101000',
-        5   =>'100100100',
-        6   =>'100100010',
-        7   =>'101010000',
-        8   =>'100010010',
-        9   =>'100001010',
-        A   =>'110101000',
-        B   =>'110100100',
-        C   =>'110100010',
-        D   =>'110010100',
-        E   =>'110010010',
-        F   =>'110001010',
-        G   =>'101101000',
-        H   =>'101100100',
-        I   =>'101100010',
-        J   =>'100110100',
-        K   =>'100011010',
-        L   =>'101011000',
-        M   =>'101001100',
-        N   =>'101000110',
-        O   =>'100101100',
-        P   =>'100010110',
-        Q   =>'110110100',
-        R   =>'110110010',
-        S   =>'110101100',
-        T   =>'110100110',
-        U   =>'110010110',
-        V   =>'110011010',
-        W   =>'101101100',
-        X   =>'101100110',
-        Y   =>'100110110',
-        Z   =>'100111010',
-       ' '  =>'111010010',
-       '$'  =>'111001010',
-       '%'  =>'110101110',
-       '($)'=>'100100110',
-       '(%)'=>'111011010',
-       '(+)'=>'100110010',
-       '(/)'=>'111010110',
-       '+'  =>'101110110',
-       '-'  =>'100101110',
-       '.'  =>'111010100',
-       '/'  =>'101101110',
-       '*'  =>'101011110',  ##Start/Stop
-    };
-
-    my @sum_text = ('*', $self->_calculateSums($text), '*');
-
-    my @rv = map { split //, $code93bar->{$_} } @sum_text;
-    push @rv, 1;
-    return \@rv;
-}
-
-
-#-----------------------------------------------------------------------------
-# calculateSums (for GD::Barcode::Code93)
-#-----------------------------------------------------------------------------
-sub _calculateSums {
-    my $self = shift;
-    my $text = shift;
-    my @array = split(//, scalar reverse $text);
-
-    my %code93values = (
-        '0'    =>'0',
-        '1'    =>'1',
-        '2'    =>'2',
-        '3'    =>'3',
-        '4'    =>'4',
-        '5'    =>'5',
-        '6'    =>'6',
-        '7'    =>'7',
-        '8'    =>'8',
-        '9'    =>'9',
-        'A'    =>'10',
-        'B'    =>'11',
-        'C'    =>'12',
-        'D'    =>'13',
-        'E'    =>'14',
-        'F'    =>'15',
-        'G'    =>'16',
-        'H'    =>'17',
-        'I'    =>'18',
-        'J'    =>'19',
-        'K'    =>'20',
-        'L'    =>'21',
-        'M'    =>'22',
-        'N'    =>'23',
-        'O'    =>'24',
-        'P'    =>'25',
-        'Q'    =>'26',
-        'R'    =>'27',
-        'S'    =>'28',
-        'T'    =>'29',
-        'U'    =>'30',
-        'V'    =>'31',
-        'W'    =>'32',
-        'X'    =>'33',
-        'Y'    =>'34',
-        'Z'    =>'35',
-        '-'    =>'36',
-        '.'    =>'37',
-        ' '    =>'38',
-        '$'    =>'39',
-        '/'    =>'40',
-        '+'    =>'41',
-        '%'    =>'42',
-        '($)'    =>'43',
-        '(%)'    =>'44',
-        '(/)'    =>'45',
-        '(+)'    =>'46',
-        '*'        => '',
-    );
-
-    my %invCode93Values = reverse %code93values;
-    my $weighted_sum;
-
-    foreach my $counter ( qw/4 3/ ) {
-        for (my $i = 0, my $x = 1; $i <= $#array; $i++, $x++) {
-            my $letter  = $array[$i];
-
-            if ($x > ($counter * 5)) { $x = 1 }
-            $weighted_sum += ($code93values{$letter} * $x);
-        }
-
-        my $check = $invCode93Values{($weighted_sum % 47)};
-        unshift @array, $check;
-        $weighted_sum = ();
-    }
-
-    return reverse @array;
-}
 
 no Any::Moose;
 1; # End of HTML::Barcode
