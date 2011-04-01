@@ -1,5 +1,8 @@
 Revision history for HTML-Barcode
 
+0.06    Thu Mar 31 20:18:56 CDT 2011
+        - Fixed string interpolation issues for perl 5.6(?)
+
 0.05    Thu Mar 31 18:46:41 CDT 2011
         - Add synopsis to HTML::Barcode (it wasn't immediately 
           clear how to use this module)
