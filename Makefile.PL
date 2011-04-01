@@ -9,9 +9,10 @@ license  'perl';
 
 requires 'Mouse';
 requires 'Any::Moose';
+requires 'Barcode::Code93';
 
-recommends 'Barcode::Code128';
-recommends 'Text::QRCode';
+recommends 'Barcode::Code128'; # We will require this once 2.02 is out, fixing the broken tests.
+recommends 'Text::QRCode'; # we don't want to require this, since it needs libqrencode
 
 build_requires 'Test::More';
 
