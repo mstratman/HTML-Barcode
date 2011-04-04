@@ -1,36 +1,42 @@
 package HTML::Barcode;
 use Any::Moose;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 has 'text' => (
     is  => 'rw',
     isa => 'Str',
+    documentation => 'The information to put into the barcode.',
 );
 has 'foreground_color' => (
     is      => 'rw',
     isa     => 'Str',
     default => '#000',
+    documentation => 'A CSS color value for the foreground.',
 );
 has 'background_color' => (
     is      => 'rw',
     isa     => 'Str',
     default => '#fff',
+    documentation => 'A CSS color value for the background.',
 );
 has 'bar_width' => (
     is      => 'rw',
     isa     => 'Str',
     default => '2px',
+    documentation => 'A CSS value for the width of an individual bar.',
 );
 has 'bar_height' => (
     is      => 'rw',
     isa     => 'Str',
     default => '100px',
+    documentation => 'A CSS value for the height of an individual bar.',
 );
 has show_text => (
     is      => 'rw',
     isa     => 'Bool',
     default => 1,
+    documentation => 'Indicates whether or not to render the text below the barcode.',
 );
 
 has 'css_class' => (
@@ -38,6 +44,14 @@ has 'css_class' => (
     isa     => 'Str',
     default => 'hbc',
     trigger => \&_css_class_set,
+    documentation => 'The value for the "class" attribute applied to any container tags.',
+);
+
+has 'embed_style' => (
+    is      => 'rw',
+    isa     => 'Bool',
+    default => 0,
+    documentation => 'Embed the style information in HTML "style" attributes. This is NOT recommended.',
 );
 
 has 'td_on_class' => (is => 'rw', 'isa' => 'Str', lazy => 1, builder => '_build_td_on_class');
@@ -115,21 +129,40 @@ sub css {
 sub _generate_table {
     my ($self, $contents) = @_;
     my $class = $self->css_class;
-    return qq{<table class="$class">$contents</table>};
+
+    my $style = '';
+    if ($self->embed_style) {
+        $style = 'style="border:0;margin:0;padding:0;border-spacing:0;"';
+    }
+
+    return qq{<table $style class="$class">$contents</table>};
 }
 
 sub _generate_tr {
     my ($self, $contents) = @_;
-    return qq{<tr>$contents</tr>};
+
+    my $style = '';
+    if ($self->embed_style) {
+        $style = 'style="border:0;margin:0;padding:0;"';
+    }
+
+    return qq(<tr $style>$contents</tr>);
 }
 
 sub _generate_td {
     my ($self, $on, $colspan, $content) = @_;
+
+    my $style = '';
+    if ($self->embed_style) {
+        my $color = $on ? $self->foreground_color : $self->background_color;
+        $style = 'style="border:0;margin:0;padding:0;width:' . ($colspan ? 'auto' : $self->bar_width) . ';height:' . ($colspan ? 'auto' : $self->bar_height) . ';background-color:' . $color . ';color:inherit;text-align:center;"';
+    }
+
     if ($colspan) {
-        return qq{<td colspan="$colspan">$content</td>};
+        return qq{<td $style colspan="$colspan">$content</td>};
     } else {
         my $class = $on ? $self->td_on_class : $self->td_off_class;
-        return qq{<td class="$class"></td>};
+        return qq{<td $style class="$class"></td>};
     }
 }
 
@@ -259,6 +292,13 @@ classes applied to them.
 
 For example, if css_class is "barcode", you will get C<< <table class="barcode"> >> and its cells will be either C<< <td class="barcode_on"> >> or
 C<< <td class="barcode_off"> >>.
+
+=head2 embed_style
+
+Rather than rendering CSS stylesheets, embed the style information
+in HTML C<style> attributes.  You should not use this option without
+good reason, as it greatly increases the size of the generated markup,
+and makes it impossible to override with stylesheets.
 
 =head1 AUTHOR
 
