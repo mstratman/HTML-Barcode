@@ -9,3 +9,4 @@ Makefile.old$
 ^HTML-Barcode-
 ^.gitignore
 .swp$
+pod2h*

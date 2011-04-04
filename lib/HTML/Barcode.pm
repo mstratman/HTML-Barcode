@@ -132,10 +132,10 @@ sub _generate_table {
 
     my $style = '';
     if ($self->embed_style) {
-        $style = 'style="border:0;margin:0;padding:0;border-spacing:0;"';
+        $style = ' style="border:0;margin:0;padding:0;border-spacing:0;"';
     }
 
-    return qq{<table $style class="$class">$contents</table>};
+    return qq{<table$style class="$class">$contents</table>};
 }
 
 sub _generate_tr {
@@ -143,10 +143,10 @@ sub _generate_tr {
 
     my $style = '';
     if ($self->embed_style) {
-        $style = 'style="border:0;margin:0;padding:0;"';
+        $style = ' style="border:0;margin:0;padding:0;"';
     }
 
-    return qq(<tr $style>$contents</tr>);
+    return qq(<tr$style>$contents</tr>);
 }
 
 sub _generate_td {
@@ -155,14 +155,14 @@ sub _generate_td {
     my $style = '';
     if ($self->embed_style) {
         my $color = $on ? $self->foreground_color : $self->background_color;
-        $style = 'style="border:0;margin:0;padding:0;width:' . ($colspan ? 'auto' : $self->bar_width) . ';height:' . ($colspan ? 'auto' : $self->bar_height) . ';background-color:' . $color . ';color:inherit;text-align:center;"';
+        $style = ' style="border:0;margin:0;padding:0;width:' . ($colspan ? 'auto' : $self->bar_width) . ';height:' . ($colspan ? 'auto' : $self->bar_height) . ';background-color:' . $color . ';color:inherit;text-align:center;"';
     }
 
     if ($colspan) {
-        return qq{<td $style colspan="$colspan">$content</td>};
+        return qq{<td$style colspan="$colspan">$content</td>};
     } else {
         my $class = $on ? $self->td_on_class : $self->td_off_class;
-        return qq{<td $style class="$class"></td>};
+        return qq{<td$style class="$class"></td>};
     }
 }
 
