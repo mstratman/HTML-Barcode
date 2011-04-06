@@ -3,7 +3,7 @@ use Test::More;
 eval { require Text::QRCode; 1 };
 my $has_mod = $@ ? 0 : 1;
 subtest 'qrcode' => sub {
-    plan(skip_all => 'Text::QRCode not installed') unless $has_mod;
+    plan($has_mod ? (tests => 3) : (skip_all => 'Optional module Text::QRCode not installed'));
     require_ok( 'HTML::Barcode::QRCode' );
     my $code = new_ok('HTML::Barcode::QRCode' => [text => 'http://search.cpan.org']);
     my $output = $code->render;

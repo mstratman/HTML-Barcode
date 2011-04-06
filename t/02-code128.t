@@ -3,7 +3,7 @@ use Test::More;
 eval { require Barcode::Code128; 1 };
 my $has_mod = $@ ? 0 : 1;
 subtest 'code128' => sub {
-    plan(skip_all => 'Barcode::Code128 not installed') unless $has_mod;
+    plan($has_mod ? (tests => 3) : (skip_all => 'Optional module Barcode::Code128 not installed'));
     require_ok( 'HTML::Barcode::Code128' );
     my $code = new_ok('HTML::Barcode::Code128' => [text => 'MONKEY']);
     my $output = $code->render;
