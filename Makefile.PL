@@ -9,14 +9,22 @@ license  'perl';
 
 requires 'Mouse';
 requires 'Any::Moose';
-requires 'Barcode::Code93';
+requires 'Barcode::Code93'; # Required, since i know it will install cleanly everywhere.
 
-recommends 'Barcode::Code128'; # We will require this once 2.02 is out, fixing the broken tests.
-recommends 'Text::QRCode'; # we don't want to require this, since it needs libqrencode
+features(
+    'Code 128 support' => [
+        -default => 0,     # Optional, since its tests fail.
+        'Barcode::Code128' => 0,
+    ],
+    'QR code support' => [
+        -default => 0,    # Optional, since it requires libqrencode
+        'Text::QRCode' => 0,
+    ],
+);
 
 build_requires 'Test::More';
 
-#auto_install;
+auto_install;
 
 resources repository => 'https://github.com/mstratman/HTML-Barcode';
 
