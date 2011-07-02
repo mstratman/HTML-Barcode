@@ -3,11 +3,13 @@
 Makefile*
 !Makefile.PL
 META.yml
+MYMETA.yml
 blib
 build
 inc
 pm_to_blib
 MANIFEST
+MANIFEST.bak
 !MANIFEST.SKIP
 Debian*
 HTML-Barcode-*
