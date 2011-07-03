@@ -193,6 +193,8 @@ Others may exist, so try searching CPAN.
 
 =item L<HTML::Barcode::QRCode> - Two dimensional QR codes.
 
+=item L<HTML::Barcode::DataMatrix> - Two dimensional Data Matrix barcodes.
+
 =item L<HTML::Barcode::Code93> - Code 93 barcodes.
 
 =item L<HTML::Barcode::Code128> - Code 128 barcodes.
