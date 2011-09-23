@@ -4,6 +4,7 @@ Makefile*
 !Makefile.PL
 META.yml
 MYMETA.yml
+MYMETA.json
 blib
 build
 inc
