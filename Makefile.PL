@@ -13,7 +13,6 @@ test_requires 'Test::More';
 tests 't/*.t';
 author_tests 'xt';
 
-githubmeta;
-auto_include;
+auto_set_repository;
 auto_install;
 WriteAll;

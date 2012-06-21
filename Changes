@@ -1,5 +1,10 @@
 Revision history for HTML-Barcode
 
+0.11    Thu Jun 21 09:14:42 CDT 2012
+        - Use Module::Install::Repository because metacpan doesn't
+          display the repository correctly as set by GithubMeta.
+        - Do not auto_include(), and do not include Test::More.
+
 0.10    Mon Jul  4 01:34:11 CDT 2011
         - Move author tests to xt to avoid failed tests.
 
