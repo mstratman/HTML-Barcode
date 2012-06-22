@@ -1,61 +1,65 @@
 package HTML::Barcode;
-use Any::Moose;
+use Moo;
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 has 'text' => (
     is  => 'rw',
-    isa => 'Str',
     documentation => 'The information to put into the barcode.',
 );
+
 has 'foreground_color' => (
     is      => 'rw',
-    isa     => 'Str',
-    default => '#000',
+    builder => '_build_foreground_color',
     documentation => 'A CSS color value for the foreground.',
 );
+sub _build_foreground_color { '#000' }
+
 has 'background_color' => (
     is      => 'rw',
-    isa     => 'Str',
-    default => '#fff',
+    builder => '_build_background_color',
     documentation => 'A CSS color value for the background.',
 );
+sub _build_background_color { '#fff' }
+
 has 'bar_width' => (
     is      => 'rw',
-    isa     => 'Str',
-    default => '2px',
+    builder => '_build_bar_width',
     documentation => 'A CSS value for the width of an individual bar.',
 );
+sub _build_bar_width { '2px' }
+
 has 'bar_height' => (
     is      => 'rw',
-    isa     => 'Str',
-    default => '100px',
+    builder => '_build_bar_height',
     documentation => 'A CSS value for the height of an individual bar.',
 );
+sub _build_bar_height { '100px' }
+
 has show_text => (
     is      => 'rw',
-    isa     => 'Bool',
-    default => 1,
+    builder => '_build_show_text',
     documentation => 'Indicates whether or not to render the text below the barcode.',
 );
+sub _build_show_text { 1 }
 
 has 'css_class' => (
     is      => 'rw',
-    isa     => 'Str',
-    default => 'hbc',
+    builder => '_build_css_class',
     trigger => \&_css_class_set,
     documentation => 'The value for the "class" attribute applied to any container tags.',
 );
+sub _build_css_class { 'hbc' }
 
 has 'embed_style' => (
     is      => 'rw',
-    isa     => 'Bool',
-    default => 0,
+    builder => '_build_embed_style',
     documentation => 'Embed the style information in HTML "style" attributes. This is NOT recommended.',
 );
+sub _build_embed_style { 0 }
 
-has 'td_on_class' => (is => 'rw', 'isa' => 'Str', lazy => 1, builder => '_build_td_on_class');
-has 'td_off_class' => (is => 'rw', 'isa' => 'Str', lazy => 1, builder => '_build_td_off_class');
+has 'td_on_class' => (is => 'rw', lazy => 1, builder => '_build_td_on_class');
+has 'td_off_class' => (is => 'rw', lazy => 1, builder => '_build_td_off_class');
 sub _css_class_set {
     my ($self) = @_;
     $self->td_on_class($self->_build_td_on_class);
@@ -234,7 +238,7 @@ Feel free to override any other methods, or use method modifiers
 
 =head2 new (%attributes)
 
-Default constructor provided by L<Moose> or L<Mouse>, which can take values for
+Default constructor provided by L<Moo>, which can take values for
 any of the L<attributes|/ATTRIBUTES>.
 
 =head2 render
@@ -323,5 +327,4 @@ See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
-no Any::Moose;
-1; # End of HTML::Barcode
+1;

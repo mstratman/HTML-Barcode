@@ -1,16 +1,17 @@
 package HTML::Barcode::2D;
-use Any::Moose;
+use Moo;
 extends 'HTML::Barcode';
 
-has '+show_text' => (default => 0);
+sub _build_show_text { 0 }
+sub _build_bar_width  { '3px' }
+sub _build_bar_height { '3px' }
 
-has '+bar_width' => (default => '3px');
-has '+bar_height' => (default => '3px');
 has module_size => (
     is      => 'rw',
-    default => '3px',
+    builder => '_build_module_size',
     trigger => \&_module_size_set,
 );
+sub _build_module_size { '3px' }
 sub _module_size_set {
     my ($self, $size) = @_;
     $self->bar_width($size);
@@ -92,5 +93,4 @@ See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
-no Any::Moose;
-1; # End of HTML::Barcode
+1;

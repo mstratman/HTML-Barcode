@@ -6,11 +6,14 @@ name     'HTML-Barcode';
 license  'perl';
 all_from 'lib/HTML/Barcode.pm';
 
-requires 'Any::Moose' => '0.15';
+requires 'Moo' => '0.091008';
 
 
-test_requires 'Test::More';
+test_requires 'Test::More' => 0;
+test_requires 'FindBin'    => 0;
+test_requires 'File::Spec' => 0;
 tests 't/*.t';
+
 author_tests 'xt';
 
 auto_set_repository;

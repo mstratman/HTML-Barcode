@@ -1,5 +1,9 @@
 Revision history for HTML-Barcode
 
+0.12    Fri Jun 22 14:31:56 CDT 2012
+        - Converted from Any::Moose to Moo
+        - added some xt/*.t test files that were used for sanity checking.
+
 0.11    Thu Jun 21 09:14:42 CDT 2012
         - Use Module::Install::Repository because metacpan doesn't
           display the repository correctly as set by GithubMeta.
