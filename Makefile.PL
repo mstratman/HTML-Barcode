@@ -6,7 +6,7 @@ name     'HTML-Barcode';
 license  'perl';
 all_from 'lib/HTML/Barcode.pm';
 
-requires 'Moo' => '0.091008';
+requires 'Moo' => '1.000000';
 
 
 test_requires 'Test::More' => 0;
