@@ -1,5 +1,6 @@
 ^HTML-Barcode-
 MYMETA\.yml
+MYMETA\.json
 ^\.gitignore
 \.swp$
 pod2h*
