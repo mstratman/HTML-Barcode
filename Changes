@@ -1,5 +1,8 @@
 Revision history for HTML-Barcode
 
+0.12    Fri Nov 20 13:04:36 CST 2015
+        - Removed MYMETA.json: https://github.com/mstratman/HTML-Barcode/pull/1
+
 0.11    Thu Jun 21 09:14:42 CDT 2012
         - Use Module::Install::Repository because metacpan doesn't
           display the repository correctly as set by GithubMeta.

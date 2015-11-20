@@ -1,7 +1,7 @@
 package HTML::Barcode;
 use Any::Moose;
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 has 'text' => (
     is  => 'rw',
