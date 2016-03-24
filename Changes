@@ -1,5 +1,8 @@
 Revision history for HTML-Barcode
 
+0.13    Thu Mar 24 14:52:21 CDT 2016
+        - Switched from Any::Moose to Moo
+
 0.12    Fri Nov 20 13:04:36 CST 2015
         - Removed MYMETA.json: https://github.com/mstratman/HTML-Barcode/pull/1
 

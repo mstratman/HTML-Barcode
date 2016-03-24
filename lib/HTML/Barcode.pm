@@ -1,7 +1,7 @@
 package HTML::Barcode;
 use Moo;
 
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 has 'text' => (
     is  => 'rw',
