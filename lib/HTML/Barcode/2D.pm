@@ -1,5 +1,5 @@
 package HTML::Barcode::2D;
-use Any::Moose;
+use Moo;
 extends 'HTML::Barcode';
 
 has '+show_text' => (default => 0);
@@ -92,5 +92,4 @@ See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
-no Any::Moose;
 1; # End of HTML::Barcode
